@@ -2,5 +2,6 @@
 bin
 obj
 *.suo       # no .suo files - VS user preference configs, specific to your machine
+
 # mstest test results
 TestResults
