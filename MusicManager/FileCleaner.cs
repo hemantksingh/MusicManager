@@ -8,9 +8,9 @@ using System.Reflection;
 
 namespace MusicManager
 {
-    class FileNameCleaner
+    class FileCleaner : MusicManager.IFileCleaner
     {
-        public void Convert(string[] files)
+        public void CleanFileProperties(string[] files)
         {
             foreach (string filePath in files)
             {
@@ -28,7 +28,8 @@ namespace MusicManager
                         string propertyValue = (string)property.GetValue(tagFile.Tag, null);
                         if(!string.IsNullOrEmpty(propertyValue))
                         {
-                            string propertyNewValue = propertyValue.Remove("-[]".ToCharArray()).Replace(stringToReplace, string.Empty);
+                            string propertyNewValue = propertyValue.Remove("-[]".ToCharArray())
+                                .Replace(stringToReplace, string.Empty);
                             property.SetValue(tagFile.Tag, propertyNewValue, null);
                         }
                     }
@@ -70,7 +71,7 @@ namespace MusicManager
             }
         }
 
-        internal void Convert(FileInfo[] infos)
+        public void CleanFileNames(FileInfo[] infos)
         {
             string stringToReplace = "Songs.PK";
 

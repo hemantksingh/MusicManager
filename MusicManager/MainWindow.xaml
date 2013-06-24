@@ -24,6 +24,12 @@
               Click="DecreaseFont_Click"/>
             </MenuItem>-->
         </Menu>
-        <Button Content="Convert" Height="23" HorizontalAlignment="Left" Margin="12,63,0,0" Name="btnSelect" VerticalAlignment="Top" Width="75" Click="btnSelect_Click" />
+        <Button 
+            Content="Convert" 
+            Height="23" 
+            HorizontalAlignment="Left" 
+            Margin="12,63,0,0" 
+            Name="btnSelect" VerticalAlignment="Top" Width="75" 
+            Command ="{Binding Path=CleanCommand}" />
     </Grid>
 </Window>

@@ -24,42 +24,7 @@ namespace MusicManager
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void btnSelect_Click(object sender, RoutedEventArgs e)
-        {
-            string path = GetSelectedpath();
-
-            if (!string.IsNullOrEmpty(path))
-            {
-                FileNameCleaner converter = new FileNameCleaner();
-                converter.Convert(Directory.GetFiles(path, "*.mp3"));
-
-                DirectoryInfo d = new DirectoryInfo(path);
-                FileInfo[] infos = d.GetFiles("*.mp3");
-                converter.Convert(infos);
-            }
-        }
-
-        private static string GetSelectedpath()
-        {
-            FolderBrowserDialog dlg = new FolderBrowserDialog();
-
-            //dlg.FileName = "Music Files";
-            //dlg.DefaultExt = ".mp3";
-            //dlg.Filter = "Music files (.mp3)| *.mp3";
-
-            dlg.Description = "Select directory to choose from";
-            dlg.ShowNewFolderButton = true;
-            var result = dlg.ShowDialog();
-
-            string path = string.Empty;
-
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                path = dlg.SelectedPath;
-            }
-            return path;
+            this.DataContext = new MusicManagerViewModel(new DisplayService(), new FileCleaner());
         }
     }
 }
