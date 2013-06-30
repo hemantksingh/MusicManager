@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MusicManager
 {
-    interface IDisplayService
+    public interface IDisplayService
     {
         string DisplayFolderBrowserDialogue();
     }

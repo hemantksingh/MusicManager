@@ -34,39 +34,7 @@ namespace MusicManager
                         }
                     }
                 }
-
-                //if (!string.IsNullOrEmpty(tagFile.Tag.Title))
-                //{
-                //    string title = tagFile.Tag.Title.Clean(stripDash: true);
-                //    tagFile.Tag.Title = title.Replace(stringToReplace, string.Empty);
-                //}
-
-
-
-                //if (!string.IsNullOrEmpty(tagFile.Tag.Album))
-                //{
-                //    string album = tagFile.Tag.Album.Clean(stripDash: true);
-                //    tagFile.Tag.Album = album.Replace(stringToReplace, string.Empty);
-                //}
-
-                //if (!string.IsNullOrEmpty(tagFile.Tag.Comment))
-                //{
-                //    string comment = tagFile.Tag.Comment.Clean(stripDash: true);
-                //    tagFile.Tag.Comment = comment.Replace(stringToReplace, string.Empty);
-                //}
-
-                //if (!string.IsNullOrEmpty(tagFile.Tag.Copyright))
-                //{
-                //    string copyright = tagFile.Tag.Copyright.Clean(stripDash: true);
-                //    tagFile.Tag.Copyright = copyright.Replace(stringToReplace, string.Empty);
-                //}
-
-                //if (!string.IsNullOrEmpty(tagFile.Tag.TitleSort))
-                //{
-                //    string titleSort = tagFile.Tag.TitleSort.Clean(stripDash: true);
-                //    tagFile.Tag.TitleSort = titleSort.Replace(stringToReplace, string.Empty);
-                //}
-
+                
                 tagFile.Save();
             }
         }

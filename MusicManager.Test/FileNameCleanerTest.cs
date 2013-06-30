@@ -10,9 +10,8 @@ namespace MusicManager.Test
     public class FileNameCleanerTest
     {
         [Test]
-        public void TestSomething()
+        public void CleanFileNameRemovesSpecifiedTextFromFileName()
         {
-            //string regex = @"^\W"
         }
     }
 }

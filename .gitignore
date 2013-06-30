@@ -1,7 +1,15 @@
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
-bin
-obj
-*.suo       # no .suo files - VS user preference configs, specific to your machine
+bin/
+obj/
+# VS user preference configs, specific to your machine
+*.suo
+*.dll
+*.pdb
+# Test coverage files in the TestResults
+*.coverage
+# Nuget packages dir. 
+packages/
 
-# mstest test results
-TestResults
+MusicManager.Test/TestResult.xml
+MusicManager.Test/MusicManager.Test.csproj.VisualState.xml
+TestResults\01638466-909e-4293-bba0-a5585e7fc95e*/

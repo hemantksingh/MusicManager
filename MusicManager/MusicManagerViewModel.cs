@@ -7,17 +7,18 @@ using System.Windows.Input;
 
 namespace MusicManager
 {
-    class MusicManagerViewModel
+    public class MusicManagerViewModel
     {
         private IDisplayService _displayService;
         private IFileCleaner _cleaner;
+        private const string MP3FileSearchPattern = "*.mp3"; 
 
         public MusicManagerViewModel(IDisplayService displayService, IFileCleaner cleaner)
         {
-            this._displayService = displayService;
-            this._cleaner = cleaner;
+            _displayService = displayService;
+            _cleaner = cleaner;
 
-            this.CleanCommand = new DelegateCommand<object>((o) => CleanUpFiles());
+            CleanCommand = new DelegateCommand<object>((o) => CleanUpFiles());
         }
 
         public ICommand CleanCommand { get; set; }
@@ -27,10 +28,10 @@ namespace MusicManager
             string selectedPath = this._displayService.DisplayFolderBrowserDialogue();
             if (!string.IsNullOrEmpty(selectedPath))
             {
-                _cleaner.CleanFileProperties(Directory.GetFiles(selectedPath, "*.mp3"));
+                _cleaner.CleanFileProperties(Directory.GetFiles(selectedPath, MP3FileSearchPattern));
 
-                DirectoryInfo d = new DirectoryInfo(selectedPath);
-                FileInfo[] infos = d.GetFiles("*.mp3");
+                DirectoryInfo directory = new DirectoryInfo(selectedPath);
+                FileInfo[] infos = directory.GetFiles(MP3FileSearchPattern);
                 _cleaner.CleanFileNames(infos);
             }
         }
