@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.IO;
+using Autofac;
 
 namespace MusicManager
 {
@@ -24,7 +25,16 @@ namespace MusicManager
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MusicManagerViewModel(new DisplayService(), new FileCleaner());
+            IContainer  container = BuildAutofacContainer();
+            this.DataContext = container.Resolve<MusicManagerViewModel>();
+        }
+
+        private IContainer BuildAutofacContainer()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<MusicManagerModule>();
+
+            return builder.Build();
         }
     }
 }
