@@ -22,5 +22,7 @@ namespace MusicManager.Properties {
                 return defaultInstance;
             }
         }
+
+        public string LastSelectedFolder { get; set; }
     }
 }

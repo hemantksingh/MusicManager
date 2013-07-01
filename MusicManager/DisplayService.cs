@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicManager.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,9 @@ namespace MusicManager
     {
         public string DisplayFolderBrowserDialogue()
         {
+            Settings.Default.Reload();
             var dialog = new FolderBrowserDialog();
-
+            dialog.SelectedPath = Settings.Default.LastSelectedFolder;
             //dlg.FileName = "Music Files";
             //dlg.DefaultExt = ".mp3";
             //dlg.Filter = "Music files (.mp3)| *.mp3";
@@ -26,6 +28,9 @@ namespace MusicManager
             {
                 path = dialog.SelectedPath;
             }
+
+            if(!string.IsNullOrEmpty(path))
+                Settings.Default.LastSelectedFolder = path;
             return path;
         }
     }

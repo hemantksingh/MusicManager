@@ -12,8 +12,7 @@ namespace MusicManager
         {
             builder.RegisterType<MusicManagerViewModel>();
             builder.RegisterAssemblyTypes(typeof(MusicManagerModule).Assembly)
-                .AsImplementedInterfaces()
-                .AsSelf();
+                .AsImplementedInterfaces();
         }
     }
 }
