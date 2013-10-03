@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Reflection;
 
 namespace MusicManager
 {
-    class FileCleaner : MusicManager.IFileCleaner
+    class FileCleaner : IFileCleaner
     {
         public void CleanFileProperties(string[] files)
         {
             foreach (string filePath in files)
             {
-                string stringToReplace = "www.Songs.PK";
+                const string stringToReplace = "www.Songs.PK";
 
                 TagLib.File tagFile = TagLib.File.Create(filePath);
-                string artist = tagFile.Tag.FirstAlbumArtist;
 
                 Type tag = tagFile.Tag.GetType();
 
@@ -25,7 +20,7 @@ namespace MusicManager
                 {
                     if (property.PropertyType == typeof(string) && property.CanWrite)
                     {
-                        string propertyValue = (string)property.GetValue(tagFile.Tag, null);
+                        var propertyValue = (string)property.GetValue(tagFile.Tag, null);
                         if(!string.IsNullOrEmpty(propertyValue))
                         {
                             string propertyNewValue = propertyValue.Remove("-[]".ToCharArray())
@@ -41,7 +36,7 @@ namespace MusicManager
 
         public void CleanFileNames(FileInfo[] infos)
         {
-            string stringToReplace = "Songs.PK";
+            const string stringToReplace = "Songs.PK";
 
             foreach (FileInfo fileInfo in infos)
             {

@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace MusicManager
 {
-    class DelegateCommand<T>: ICommand  where T: class
+    internal class DelegateCommand<T> : ICommand where T : class
     {
-        private Predicate<T> _canExecute;
-        private Action<T> _execute;
+        private readonly Predicate<T> _canExecute;
+        private readonly Action<T> _execute;
 
         /// <summary>
-        /// Initializes an instance of the  <see cref="DelegateCommand"/> class>
+        /// Initializes an instance of the <see cref="DelegateCommand"/> class>
         /// </summary>
         /// <param name="execute">The action to execute.</param>
         /// <param name="canExecute">Represents the set of criteria to determine whether the command can be executed.</param>
@@ -28,7 +25,7 @@ namespace MusicManager
 
             if (_canExecute != null)
             {
-                canExecute = _canExecute((T)parameter);
+                canExecute = _canExecute((T) parameter);
             }
             return canExecute;
         }

@@ -1,5 +1,4 @@
-﻿using System;
-namespace MusicManager
+﻿namespace MusicManager
 {
     public interface IFileCleaner
     {

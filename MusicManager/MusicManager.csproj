@@ -91,7 +91,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="FileCleaner.cs" />
-    <Compile Include="FileReader.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
