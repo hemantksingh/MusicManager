@@ -30,7 +30,7 @@ namespace MusicManager
             try
             {
                 IContainer container = BuildAutofacContainer();
-                CompositionRoot = container.Resolve<MusicManagerViewModel>();
+                CompositionRoot = container.Resolve<MainViewModel>();
             }
             catch (Exception exception)
             {

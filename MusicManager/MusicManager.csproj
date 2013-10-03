@@ -87,7 +87,7 @@
     <Compile Include="IDisplayService.cs" />
     <Compile Include="IFileCleaner.cs" />
     <Compile Include="MusicManagerModule.cs" />
-    <Compile Include="MusicManagerViewModel.cs" />
+    <Compile Include="MainViewModel.cs" />
     <Compile Include="NLogLogger.cs" />
     <Compile Include="StringExtension.cs" />
     <Page Include="MainWindow.xaml">

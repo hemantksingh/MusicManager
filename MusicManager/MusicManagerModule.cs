@@ -8,7 +8,7 @@ namespace MusicManager
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<MusicManagerViewModel>();
+            builder.RegisterType<MainViewModel>();
             builder.Register(context => new NLogLogger(LogManager.GetLogger("TestLogger")));
             builder.RegisterAssemblyTypes(typeof(MusicManagerModule).Assembly)
                 .AsImplementedInterfaces()
