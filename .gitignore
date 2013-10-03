@@ -9,7 +9,6 @@ obj/
 *.coverage
 # Nuget packages dir. 
 packages/
-
-MusicManager.Test/TestResult.xml
-MusicManager.Test/MusicManager.Test.csproj.VisualState.xml
-TestResults\01638466-909e-4293-bba0-a5585e7fc95e*/
+*.ncrunchsolution
+*.ncrunchproject
+[Tt]est[Rr]esult*
