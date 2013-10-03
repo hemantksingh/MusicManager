@@ -11,16 +11,7 @@ namespace MusicManager
         public MainWindow()
         {
             InitializeComponent();
-            IContainer  container = BuildAutofacContainer();
-            this.DataContext = container.Resolve<MusicManagerViewModel>();
-        }
-
-        private IContainer BuildAutofacContainer()
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule<MusicManagerModule>();
-
-            return builder.Build();
+            this.DataContext = App.CompositionRoot;
         }
     }
 }
