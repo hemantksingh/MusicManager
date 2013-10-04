@@ -135,6 +135,14 @@
       <Project>{d9b78acd-1c52-4a0b-abaa-b9b9b0b6d11e}</Project>
       <Name>MusicManager.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MusicManager.Shared\MusicManager.Shared.csproj">
+      <Project>{123707FA-18C4-4089-8235-7F79111C81E5}</Project>
+      <Name>MusicManager.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MusicManager.UI\MusicManager.UI.csproj">
+      <Project>{CB0C6955-44A1-4123-BB8D-2451447C38EB}</Project>
+      <Name>MusicManager.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

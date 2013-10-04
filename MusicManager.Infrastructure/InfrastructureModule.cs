@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using MusicManager.Shared;
 using NLog;
 
 namespace MusicManager.Infrastructure
@@ -9,7 +10,7 @@ namespace MusicManager.Infrastructure
         {
             Logger logger = LogManager.GetLogger("TestLogger");
 
-            builder.Register(context => new ErrorHandler(logger)).As<IErrorHandler>();
+            builder.Register(context => new ErrorHandler(logger, context.Resolve<IPromptService>())).As<IErrorHandler>();
             builder.Register(context => new NLogLogger(logger));
         }
     }

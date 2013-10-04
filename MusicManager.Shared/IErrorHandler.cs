@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace MusicManager.Infrastructure
+namespace MusicManager.Shared
 {
     public interface IErrorHandler
     {

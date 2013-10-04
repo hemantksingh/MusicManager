@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Threading;
 using Autofac;
 using MusicManager.Infrastructure;
+using MusicManager.Shared;
+using MusicManager.UI;
 
 namespace MusicManager
 {
@@ -26,7 +28,7 @@ namespace MusicManager
 
             var errorHandler = _container.Resolve<IErrorHandler>();
             errorHandler.HandleError(e.Exception, logMessage, userMessage);
-            
+
             e.Handled = true;
         }
 
@@ -47,6 +49,7 @@ namespace MusicManager
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<MusicManagerModule>();
+            builder.RegisterModule<PresentationModule>();
             builder.RegisterModule<InfrastructureModule>();
 
             return builder.Build();
