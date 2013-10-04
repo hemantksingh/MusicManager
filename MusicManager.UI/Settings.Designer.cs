@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MusicManager.Properties {
+namespace MusicManager.UI {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

@@ -9,13 +9,13 @@ using MusicManager.UI;
 namespace MusicManager
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
         /// <summary>
-        /// The single place where the composition of the object graphs for the entire application
-        /// takes place. The container resolves this on application start up.
+        ///  The single place where the composition of the object graphs for the entire application
+        ///  takes place. The container resolves this on application start up.
         /// </summary>
         public static object CompositionRoot;
 
@@ -24,10 +24,20 @@ namespace MusicManager
         private void App_OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             const string userMessage = "Oops!!! Something went wrong. An error has been logged to the local log file.";
+            const string userMessageIfLoggingFails =
+                "Oops!!! Something went wrong. Poosibly an error occured while bootstrapping the application.";
             const string logMessage = "An unhandled exception has occurred";
 
-            var errorHandler = _container.Resolve<IErrorHandler>();
-            errorHandler.HandleError(e.Exception, logMessage, userMessage);
+            try
+            {
+                var errorHandler = _container.Resolve<IErrorHandler>();
+                errorHandler.HandleError(e.Exception, logMessage, userMessage);
+            }
+            catch (Exception)
+            {
+                var promptService = new PromptService("Music Manager");
+                promptService.ShowError(userMessageIfLoggingFails);
+            }
 
             e.Handled = true;
         }
@@ -41,7 +51,7 @@ namespace MusicManager
             }
             catch (Exception exception)
             {
-                throw new Exception("An error ocurred while bootstrapping the applciation", exception);
+                throw new Exception("An error ocurred while bootstrapping the applciation.", exception);
             }
         }
 

@@ -7,13 +7,13 @@ namespace MusicManager
 {
     public class MainViewModel
     {
-        private readonly IDisplayService _displayService;
+        private readonly IPromptService _promptService;
         private readonly IFileCleaner _cleaner;
         private const string Mp3FileSearchPattern = "*.mp3"; 
 
-        public MainViewModel(IDisplayService displayService, IFileCleaner cleaner)
+        public MainViewModel(IPromptService promptService, IFileCleaner cleaner)
         {
-            _displayService = displayService;
+            _promptService = promptService;
             _cleaner = cleaner;
 
             CleanCommand = new DelegateCommand<object>(o => CleanUpFiles());
@@ -23,7 +23,7 @@ namespace MusicManager
 
         private void CleanUpFiles()
         {
-            string selectedPath = _displayService.DisplayFolderBrowserDialogue();
+            string selectedPath = _promptService.ShowFolderBrowserDialogue();
             if (!string.IsNullOrEmpty(selectedPath))
             {
                 _cleaner.CleanFileProperties(Directory.GetFiles(selectedPath, Mp3FileSearchPattern));
