@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Threading;
 using Autofac;
-using NLog;
+using MusicManager.Infrastructure;
 
 namespace MusicManager
 {
@@ -17,10 +17,15 @@ namespace MusicManager
         /// </summary>
         public static object CompositionRoot;
 
+        private IContainer _container;
+
         private void App_OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             const string userMessage = "Oops!!! Something went wrong. An error has been logged to the local log file.";
-            HandleException(e.Exception, "An unhandled exception has occurred", userMessage);
+            const string logMessage = "An unhandled exception has occurred";
+
+            var errorHandler = _container.Resolve<IErrorHandler>();
+            errorHandler.HandleError(e.Exception, logMessage, userMessage);
             
             e.Handled = true;
         }
@@ -29,8 +34,8 @@ namespace MusicManager
         {
             try
             {
-                IContainer container = BuildAutofacContainer();
-                CompositionRoot = container.Resolve<MainViewModel>();
+                _container = BuildAutofacContainer();
+                CompositionRoot = _container.Resolve<MainViewModel>();
             }
             catch (Exception exception)
             {
@@ -42,17 +47,9 @@ namespace MusicManager
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<MusicManagerModule>();
+            builder.RegisterModule<InfrastructureModule>();
 
             return builder.Build();
-        }
-
-        private static void HandleException(Exception exception, string errorMessage, string userMessage)
-        {
-            Logger logger = LogManager.GetLogger("TestLogger");
-            logger.ErrorException(errorMessage, exception);
-
-            if(!string.IsNullOrWhiteSpace(userMessage))
-                MessageBox.Show(userMessage, "Music Manager",MessageBoxButton.OK, MessageBoxImage.Stop);
         }
     }
 }

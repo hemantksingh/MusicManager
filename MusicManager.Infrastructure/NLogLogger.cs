@@ -3,7 +3,7 @@ using System.Linq;
 using Castle.DynamicProxy;
 using NLog;
 
-namespace MusicManager
+namespace MusicManager.Infrastructure
 {
     public class NLogLogger : IInterceptor
     {
