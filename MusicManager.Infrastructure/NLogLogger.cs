@@ -5,7 +5,7 @@ using NLog;
 
 namespace MusicManager.Infrastructure
 {
-    public class NLogLogger : IInterceptor
+    public class NLogLogger : IInterceptor, ILogger
     {
         private readonly Logger _logger;
 
@@ -32,6 +32,11 @@ namespace MusicManager.Infrastructure
             }
 
             _logger.Info("The method invocation succeeded: result was {0}.", invocation.ReturnValue);
+        }
+
+        public void LogError(string message, Exception exception)
+        {
+            _logger.ErrorException(message, exception);
         }
     }
 }

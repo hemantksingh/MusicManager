@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ErrorHandler.cs" />
     <Compile Include="FileCleaner.cs" />
+    <Compile Include="ILogger.cs" />
     <Compile Include="InfrastructureModule.cs" />
     <Compile Include="NLogLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

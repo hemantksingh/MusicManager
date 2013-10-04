@@ -14,10 +14,10 @@ namespace MusicManager.Infrastructure
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(NLogLogger));
             
-            Logger logger = LogManager.GetLogger("TestLogger");
+            Logger logger = LogManager.GetLogger("AppLogger");
 
             builder.Register(context => new ErrorHandler(logger, context.Resolve<IPromptService>())).As<IErrorHandler>();
-            builder.Register(context => new NLogLogger(logger));
+            builder.Register(context => new NLogLogger(logger)).AsSelf().As<ILogger>();
         }
     }
 }
