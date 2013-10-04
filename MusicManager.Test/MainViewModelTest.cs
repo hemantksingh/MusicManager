@@ -1,5 +1,6 @@
 ﻿using AutoMoq;
 using Moq;
+using MusicManager.Shared;
 using NUnit.Framework;
 using System.IO;
 

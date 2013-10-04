@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using MusicManager.Shared;
+using NUnit.Framework;
 
 namespace MusicManager.Test
 {

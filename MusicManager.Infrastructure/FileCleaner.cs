@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Reflection;
+using MusicManager.Shared;
 
-namespace MusicManager
+namespace MusicManager.Infrastructure
 {
     class FileCleaner : IFileCleaner
     {

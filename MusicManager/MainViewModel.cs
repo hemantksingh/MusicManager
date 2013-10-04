@@ -1,5 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Input;
+using MusicManager.Shared;
+using MusicManager.UI;
 
 namespace MusicManager
 {

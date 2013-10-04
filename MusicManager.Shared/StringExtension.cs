@@ -1,4 +1,4 @@
-﻿namespace MusicManager
+namespace MusicManager.Shared
 {
     public static class StringExtension
     {

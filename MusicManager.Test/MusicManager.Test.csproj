@@ -83,11 +83,6 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileNameCleanerTest.cs" />
@@ -99,6 +94,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MusicManager.Shared\MusicManager.Shared.csproj">
+      <Project>{123707fa-18c4-4089-8235-7f79111c81e5}</Project>
+      <Name>MusicManager.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MusicManager\MusicManager.csproj">
       <Project>{e143b8fb-9ab0-4939-b2ee-0493d01e24dc}</Project>
       <Name>MusicManager</Name>

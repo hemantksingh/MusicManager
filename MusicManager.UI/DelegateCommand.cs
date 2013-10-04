@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace MusicManager
+namespace MusicManager.UI
 {
-    internal class DelegateCommand<T> : ICommand where T : class
+    public class DelegateCommand<T> : ICommand where T : class
     {
         private readonly Predicate<T> _canExecute;
         private readonly Action<T> _execute;

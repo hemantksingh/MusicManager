@@ -41,6 +41,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="PresentationModule.cs" />
     <Compile Include="PromptService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
