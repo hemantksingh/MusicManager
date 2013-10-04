@@ -10,5 +10,7 @@ obj/
 # Nuget packages dir. 
 packages/
 *.ncrunchsolution
+*.ncrunchsolution.user
 *.ncrunchproject
 [Tt]est[Rr]esult*
+_NCrunch_MusicManager*/
