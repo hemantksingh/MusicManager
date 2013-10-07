@@ -26,10 +26,10 @@ namespace MusicManager
             const string applicationTitle = "Music Manager";
             const string logMessage = "An unhandled exception occurred";
 
-            string userMessage = string.Format("Oops!!! '{0}' has ran into a problem ." 
-                                    + "An error has been logged to the local log file.", 
+            string userMessage = string.Format("Oops!!! '{0}' has ran into a problem. " 
+                                    + "The error details have been logged to the local log file.", 
                                     applicationTitle);
-            string userMsgIfErrorHandlingFails = string.Format("Oops!!! '{0}' has ran into a problem ." 
+            string userMsgIfErrorHandlingFails = string.Format("Oops!!! '{0}' has ran into a problem. " 
                                     + "Poosibly an error occured while bootstrapping the application.", 
                                     applicationTitle);
             try

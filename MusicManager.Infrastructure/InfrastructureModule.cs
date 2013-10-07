@@ -16,7 +16,6 @@ namespace MusicManager.Infrastructure
             
             Logger logger = LogManager.GetLogger("AppLogger");
 
-            builder.Register(context => new ErrorHandler(logger, context.Resolve<IPromptService>())).As<IErrorHandler>();
             builder.Register(context => new NLogLogger(logger)).AsSelf().As<ILogger>();
         }
     }
