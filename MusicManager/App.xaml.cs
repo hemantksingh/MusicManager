@@ -23,11 +23,15 @@ namespace MusicManager
 
         private void App_OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            const string userMessage = "Oops!!! Something went wrong. An error has been logged to the local log file.";
-            const string userMsgIfErrorHandlingFails =
-                "Oops!!! Something went wrong. Poosibly an error occured while bootstrapping the application.";
-            const string logMessage = "An unhandled exception has occurred";
+            const string applicationTitle = "Music Manager";
+            const string logMessage = "An unhandled exception occurred";
 
+            string userMessage = string.Format("Oops!!! '{0}' has ran into a problem ." 
+                                    + "An error has been logged to the local log file.", 
+                                    applicationTitle);
+            string userMsgIfErrorHandlingFails = string.Format("Oops!!! '{0}' has ran into a problem ." 
+                                    + "Poosibly an error occured while bootstrapping the application.", 
+                                    applicationTitle);
             try
             {
                 var errorHandler = _container.Resolve<IErrorHandler>();
@@ -38,7 +42,7 @@ namespace MusicManager
                 var logger = _container.Resolve<ILogger>();
                 logger.LogError(logMessage, exception);
 
-                var promptService = new PromptService("Music Manager");
+                var promptService = new PromptService(applicationTitle);
                 promptService.ShowError(userMsgIfErrorHandlingFails);
             }
 
