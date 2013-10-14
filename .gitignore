@@ -3,6 +3,7 @@ bin/
 obj/
 # VS user preference configs, specific to your machine
 *.suo
+*.csproj.user
 *.dll
 *.pdb
 # Test coverage files in the TestResults
