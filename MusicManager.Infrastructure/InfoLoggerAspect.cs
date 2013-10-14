@@ -5,11 +5,11 @@ using NLog;
 
 namespace MusicManager.Infrastructure
 {
-    public class NLogLogger : IInterceptor, ILogger
+    public class InfoLoggerAspect : IInterceptor, ILogger
     {
         private readonly Logger _logger;
 
-        public NLogLogger(Logger logger)
+        public InfoLoggerAspect(Logger logger)
         {
             _logger = logger;
         }

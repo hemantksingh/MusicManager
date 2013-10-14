@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Security.Principal;
+using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using Autofac;
@@ -26,10 +28,10 @@ namespace MusicManager
             const string applicationTitle = "Music Manager";
             const string logMessage = "An unhandled exception occurred";
 
-            string userMessage = string.Format("Oops!!! '{0}' has ran into a problem. " 
-                                    + "The error details have been logged to the local log file.", 
+            string userMessage = string.Format("Oops!!! '{0}' ran into a problem. " 
+                                    + "The error details have been saved to the local log file.", 
                                     applicationTitle);
-            string userMsgIfErrorHandlingFails = string.Format("Oops!!! '{0}' has ran into a problem. " 
+            string userMsgIfErrorHandlingFails = string.Format("Oops!!! '{0}' ran into a problem. " 
                                     + "Poosibly an error occured while bootstrapping the application.", 
                                     applicationTitle);
             try
@@ -53,6 +55,8 @@ namespace MusicManager
         {
             try
             {
+                var rolesUserBelongsTo = new[] {"Admin", "Generic"};
+                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity("HK"), rolesUserBelongsTo);
                 _container = BuildAutofacContainer();
                 CompositionRoot = _container.Resolve<MainViewModel>();
             }

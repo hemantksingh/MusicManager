@@ -54,8 +54,9 @@
     <Compile Include="FileCleaner.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="InfrastructureModule.cs" />
-    <Compile Include="NLogLogger.cs" />
+    <Compile Include="InfoLoggerAspect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AdminRoleAspect.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config">

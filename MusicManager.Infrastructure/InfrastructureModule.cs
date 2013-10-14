@@ -1,6 +1,7 @@
-﻿using Autofac;
+﻿using System.Security.Principal;
+using Autofac;
 using Autofac.Extras.DynamicProxy2;
-using MusicManager.Shared;
+using MusicManager.Infrastructure.Security;
 using NLog;
 
 namespace MusicManager.Infrastructure
@@ -9,14 +10,15 @@ namespace MusicManager.Infrastructure
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof(InfrastructureModule).Assembly)
-                .AsImplementedInterfaces()
-                .EnableInterfaceInterceptors()
-                .InterceptedBy(typeof(NLogLogger));
-            
-            Logger logger = LogManager.GetLogger("AppLogger");
+            builder.RegisterAssemblyTypes(typeof (InfrastructureModule).Assembly)
+                   .AsImplementedInterfaces()
+                   .EnableInterfaceInterceptors()
+                   .InterceptedBy(typeof (InfoLoggerAspect));
 
-            builder.Register(context => new NLogLogger(logger)).AsSelf().As<ILogger>();
+            builder.Register(context => LogManager.GetLogger("AppLogger")).As<Logger>();
+            builder.Register(context => new InfoLoggerAspect(context.Resolve<Logger>())).AsSelf().As<ILogger>();
+            builder.Register(context => new AdminRoleAspect(context.Resolve<Logger>(),
+                                                              context.Resolve<IPrincipal>()));
         }
     }
 }
