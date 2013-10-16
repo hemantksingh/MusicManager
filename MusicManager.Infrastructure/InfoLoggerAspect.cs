@@ -31,7 +31,8 @@ namespace MusicManager.Infrastructure
                 throw;
             }
 
-            _logger.Info("The method invocation succeeded: result was {0}.", invocation.ReturnValue);
+            _logger.Info("The method invocation succeeded: result was '{0}'.", 
+                invocation.ReturnValue ?? "void");
         }
 
         public void LogError(string message, Exception exception)

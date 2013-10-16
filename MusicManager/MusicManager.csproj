@@ -104,6 +104,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="..\MusicManager.Infrastructure\NLog.config">
+      <Link>NLog.config</Link>
+    </None>
     <None Include="app.config" />
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
