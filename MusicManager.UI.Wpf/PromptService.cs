@@ -1,9 +1,9 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Forms;
 using MusicManager.Shared;
 using MessageBox = System.Windows.MessageBox;
 
-namespace MusicManager.UI
+namespace MusicManager.UI.Wpf
 {
     public class PromptService : IPromptService
     {
@@ -26,21 +26,16 @@ namespace MusicManager.UI
             var dialog = new FolderBrowserDialog
             {
                 SelectedPath = Settings.Default.LastSelectedFolder,
-                Description = @"Select directory to choose from",
-                ShowNewFolderButton = true
+                Description = @"Select directory to choose music files from",
+                ShowNewFolderButton = true,
             };
             //dlg.FileName = "Music Files";
             //dlg.DefaultExt = ".mp3";
             //dlg.Filter = "Music files (.mp3)| *.mp3";
 
             var result = dialog.ShowDialog();
-
-            string path = string.Empty;
-
-            if (result == DialogResult.OK)
-            {
-                path = dialog.SelectedPath;
-            }
+            string path = result == DialogResult.OK 
+                ? dialog.SelectedPath : string.Empty;
 
             if (!string.IsNullOrEmpty(path))
                 Settings.Default.LastSelectedFolder = path;

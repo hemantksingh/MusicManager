@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace MusicManager.UI
+namespace MusicManager.UI.Wpf
 {
     public class DelegateCommand<T> : ICommand where T : class
     {

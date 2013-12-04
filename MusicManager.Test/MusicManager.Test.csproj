@@ -84,9 +84,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MusicManager.Infrastructure\MusicManager.Infrastructure.csproj">
+      <Project>{D9B78ACD-1C52-4A0B-ABAA-B9B9B0B6D11E}</Project>
+      <Name>MusicManager.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MusicManager.Shared\MusicManager.Shared.csproj">
       <Project>{123707fa-18c4-4089-8235-7f79111c81e5}</Project>
       <Name>MusicManager.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MusicManager.UI.Wpf\MusicManager.UI.Wpf.csproj">
+      <Project>{6A182AA0-49F4-48B0-A890-56902B559724}</Project>
+      <Name>MusicManager.UI.Wpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\MusicManager\MusicManager.csproj">
       <Project>{e143b8fb-9ab0-4939-b2ee-0493d01e24dc}</Project>

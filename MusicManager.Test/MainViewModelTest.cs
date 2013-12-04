@@ -1,7 +1,8 @@
-﻿using System.IO;
-using AutoMoq;
+﻿using AutoMoq;
 using Moq;
+using MusicManager.Infrastructure;
 using MusicManager.Shared;
+using MusicManager.UI.Wpf;
 using NUnit.Framework;
 
 namespace MusicManager.Test
@@ -18,76 +19,47 @@ namespace MusicManager.Test
         private AutoMoqer _mocker;
 
         [Test]
-        public void OnCleanUpCommandFolderBroswerDialougeisDisplayed()
+        public void OnSelectFilesCommandFolderBroswerDialougeisDisplayed()
         {
             var mockedViewModel = _mocker.Resolve<MainViewModel>();
 
-            mockedViewModel.CleanCommand.Execute(null);
+            mockedViewModel.SelectFilesCommand.Execute(null);
 
             _mocker.GetMock<IPromptService>().Verify(
                 x => x.ShowFolderBrowserDialogue(), Times.Once());
         }
 
         [Test]
-        public void OnCleanUpCommandIfFolderSelectedAllMp3FileNamesAreCleaned()
+        public void OnSelectFilesCommandIfFolderSelectedFileNamesDisplayed()
         {
-            var mockedViewModel = _mocker.Resolve<MainViewModel>();
-
-            _mocker.GetMock<IPromptService>().Setup(
+            var mockedPromptService = new Mock<IPromptService>();
+            var mainViewModel = new MainViewModel(mockedPromptService.Object,
+                                                  selectedPath => new FileSelectionViewModel(
+                                                                      Mock.Of<IDirectory>(),
+                                                                      Mock.Of<IFileCleaner>(),
+                                                                      selectedPath));
+            mockedPromptService.Setup(
                 x => x.ShowFolderBrowserDialogue()).Returns("C:/");
 
-            mockedViewModel.CleanCommand.Execute(null);
-
-            Mock<IFileCleaner> mockedCleaner = _mocker.GetMock<IFileCleaner>();
-            mockedCleaner.Verify(
-                x => x.CleanFileProperties(It.IsAny<string[]>()), Times.Once());
-
-            mockedCleaner.Verify(
-                x => x.CleanFileNames(It.IsAny<FileInfo[]>()), Times.Once());
+            mainViewModel.SelectFilesCommand.Execute(null);
+            
+            Assert.IsNotNull(mainViewModel.FileSelection);
         }
 
         [Test]
-        public void OnCleanUpCommandIfFolderSelectedAllMp3FilePropertiesAreCleaned()
+        public void OnSelectFilesCommandIfNoFolderSelectedNoFileNamesDisplayed()
         {
-            var mockedViewModel = _mocker.Resolve<MainViewModel>();
-
-            _mocker.GetMock<IPromptService>().Setup(
-                x => x.ShowFolderBrowserDialogue()).Returns("C:/");
-
-            mockedViewModel.CleanCommand.Execute(null);
-
-            Mock<IFileCleaner> mockedCleaner = _mocker.GetMock<IFileCleaner>();
-            mockedCleaner.Verify(
-                x => x.CleanFileProperties(It.IsAny<string[]>()), Times.Once());
-        }
-
-        [Test]
-        public void OnCleanUpCommandIfNoFolderSelectedNoFileNamesAreCleaned()
-        {
-            var mockedViewModel = _mocker.Resolve<MainViewModel>();
-            _mocker.GetMock<IPromptService>().Setup(
+            var mockedPromptService = new Mock<IPromptService>();
+            var mainViewModel = new MainViewModel(mockedPromptService.Object,
+                                                  selectedPath => new FileSelectionViewModel(
+                                                                      Mock.Of<IDirectory>(),
+                                                                      Mock.Of<IFileCleaner>(),
+                                                                      selectedPath));
+            mockedPromptService.Setup(
                 x => x.ShowFolderBrowserDialogue()).Returns(() => null);
+            mainViewModel.SelectFilesCommand.Execute(null);
 
-            mockedViewModel.CleanCommand.Execute(null);
-
-            Mock<IFileCleaner> mockedCleaner = _mocker.GetMock<IFileCleaner>();
-
-            mockedCleaner.Verify(
-                x => x.CleanFileNames(It.IsAny<FileInfo[]>()), Times.Never());
-        }
-
-        [Test]
-        public void OnCleanUpCommandIfNoFolderSelectedNoFilePropertiesAreCleaned()
-        {
-            var mockedViewModel = _mocker.Resolve<MainViewModel>();
-            _mocker.GetMock<IPromptService>().Setup(
-                x => x.ShowFolderBrowserDialogue()).Returns(() => null);
-
-            mockedViewModel.CleanCommand.Execute(null);
-
-            Mock<IFileCleaner> mockedCleaner = _mocker.GetMock<IFileCleaner>();
-            mockedCleaner.Verify(
-                x => x.CleanFileProperties(It.IsAny<string[]>()), Times.Never());
+            Assert.IsNull(mainViewModel.FileSelection);
         }
     }
 }

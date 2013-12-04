@@ -120,9 +120,9 @@
       <Project>{123707FA-18C4-4089-8235-7F79111C81E5}</Project>
       <Name>MusicManager.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MusicManager.UI\MusicManager.UI.csproj">
-      <Project>{CB0C6955-44A1-4123-BB8D-2451447C38EB}</Project>
-      <Name>MusicManager.UI</Name>
+    <ProjectReference Include="..\MusicManager.UI.Wpf\MusicManager.UI.Wpf.csproj">
+      <Project>{6a182aa0-49f4-48b0-a890-56902b559724}</Project>
+      <Name>MusicManager.UI.Wpf</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

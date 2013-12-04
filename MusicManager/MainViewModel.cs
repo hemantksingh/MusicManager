@@ -1,37 +1,52 @@
-﻿using System.IO;
+﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using MusicManager.Shared;
-using MusicManager.UI;
+using MusicManager.UI.Wpf;
 
 namespace MusicManager
 {
-    public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
+        private readonly Func<string, FileSelectionViewModel> _fileSelectionViewModelfactory;
         private readonly IPromptService _promptService;
-        private readonly IFileCleaner _cleaner;
-        private const string Mp3FileSearchPattern = "*.mp3"; 
+        private FileSelectionViewModel _fileSelection;
 
-        public MainViewModel(IPromptService promptService, IFileCleaner cleaner)
+        public MainViewModel(IPromptService promptService,
+                             Func<string, FileSelectionViewModel> fileSelectionViewModelfactory)
         {
             _promptService = promptService;
-            _cleaner = cleaner;
+            _fileSelectionViewModelfactory = fileSelectionViewModelfactory;
 
-            CleanCommand = new DelegateCommand<object>(o => CleanUpFiles());
+            SelectFilesCommand = new DelegateCommand<object>(o =>
+                {
+                    string selectedPath = _promptService.ShowFolderBrowserDialogue();
+                    if (!string.IsNullOrEmpty(selectedPath))
+                    {
+                        FileSelection = _fileSelectionViewModelfactory(selectedPath);
+                    }
+                });
         }
 
-        public ICommand CleanCommand { get; set; }
+        public ICommand SelectFilesCommand { get; private set; }
 
-        private void CleanUpFiles()
+        public FileSelectionViewModel FileSelection
         {
-            string selectedPath = _promptService.ShowFolderBrowserDialogue();
-            if (!string.IsNullOrEmpty(selectedPath))
+            get { return _fileSelection; }
+            set
             {
-                _cleaner.CleanFileProperties(Directory.GetFiles(selectedPath, Mp3FileSearchPattern));
-
-                var directory = new DirectoryInfo(selectedPath);
-                FileInfo[] infos = directory.GetFiles(Mp3FileSearchPattern);
-                _cleaner.CleanFileNames(infos);
+                _fileSelection = value;
+                OnPropertyChanged();
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using MusicManager.Shared;
@@ -7,7 +9,7 @@ namespace MusicManager.Infrastructure
 {
     class FileCleaner : IFileCleaner
     {
-        public void CleanFileProperties(string[] files)
+        public void CleanFileProperties(List<string> files)
         {
             foreach (string filePath in files)
             {
@@ -45,6 +47,7 @@ namespace MusicManager.Infrastructure
 
                 if (cleanedFileName.Contains(stringToReplace) || cleanedFileName != fileInfo.Name)
                 {
+                    Debug.Assert(fileInfo.Directory != null, "fileInfo.Directory != null");
                     string destFileName = Path.Combine(fileInfo.Directory.ToString(),
                         cleanedFileName.Replace(stringToReplace, string.Empty));
 

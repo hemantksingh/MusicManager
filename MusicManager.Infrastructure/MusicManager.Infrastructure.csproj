@@ -51,7 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DirectoryWrapper.cs" />
     <Compile Include="FileCleaner.cs" />
+    <Compile Include="IDirectory.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="InfrastructureModule.cs" />
     <Compile Include="InfoLoggerAspect.cs" />

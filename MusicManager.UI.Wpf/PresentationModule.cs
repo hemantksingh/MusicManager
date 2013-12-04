@@ -1,16 +1,17 @@
-﻿
 using Autofac;
 using Autofac.Extras.DynamicProxy2;
 using MusicManager.Infrastructure;
 using MusicManager.Infrastructure.Security;
 using MusicManager.Shared;
 
-namespace MusicManager.UI
+namespace MusicManager.UI.Wpf
 {
     public class PresentationModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<FileSelectionViewModel>();
+
             builder.RegisterAssemblyTypes(typeof(PresentationModule).Assembly)
                 .AsImplementedInterfaces()
                 .EnableInterfaceInterceptors()

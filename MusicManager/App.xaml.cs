@@ -6,7 +6,7 @@ using System.Windows.Threading;
 using Autofac;
 using MusicManager.Infrastructure;
 using MusicManager.Shared;
-using MusicManager.UI;
+using MusicManager.UI.Wpf;
 
 namespace MusicManager
 {

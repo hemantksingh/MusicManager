@@ -1,8 +1,10 @@
-﻿namespace MusicManager.Shared
+﻿using System.Collections.Generic;
+
+namespace MusicManager.Shared
 {
     public interface IFileCleaner
     {
         void CleanFileNames(System.IO.FileInfo[] infos);
-        void CleanFileProperties(string[] files);
+        void CleanFileProperties(List<string> files);
     }
 }
