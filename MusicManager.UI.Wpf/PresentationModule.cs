@@ -10,13 +10,13 @@ namespace MusicManager.UI.Wpf
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<FileSelectionViewModel>();
-            builder.RegisterType<OkCancelPanelViewModel>();
-
             builder.RegisterAssemblyTypes(this.GetType().Assembly)
                 .AsImplementedInterfaces()
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(InfoLoggerAspect));
+
+            builder.RegisterType<FileSelectionViewModel>();
+            builder.RegisterType<OkCancelPanelViewModel>();
 
             builder.Register(context => new PromptService("Music Manager"))
                    .As<IPromptService>()

@@ -66,12 +66,17 @@ namespace MusicManager
             }
         }
 
+        /// <summary>
+        /// Loads the dependant modules first before loading the main application module
+        /// to enable overriding the default dependency registrations.
+        /// </summary>
+        /// <returns></returns>
         private IContainer BuildAutofacContainer()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule<MusicManagerModule>();
             builder.RegisterModule<PresentationModule>();
             builder.RegisterModule<InfrastructureModule>();
+            builder.RegisterModule<MusicManagerModule>();
 
             return builder.Build();
         }
