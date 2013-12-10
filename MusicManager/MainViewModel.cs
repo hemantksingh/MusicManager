@@ -12,19 +12,24 @@ namespace MusicManager
         private FileSelectionViewModel _fileSelection;
         private OkCancelPanelViewModel _okCancelPanel;
 
-        public MainViewModel(IPromptService promptService,
-                             Func<string, FileSelectionViewModel> fileSelectionViewModelfactory,
+        public MainViewModel(IPromptService promptService, IEventAggregator eventAggregator,
+                             Func<FileSelectionViewModel> fileSelectionViewModelfactory,
                              Func<OkCancelPanelViewModel> okCancelViewModelfactory)
         {
+            string selectedPath = null;
             SelectFilesCommand = new DelegateCommand<object>(o =>
                 {
-                    string selectedPath = promptService.ShowFolderBrowserDialogue();
-                    FileSelection = fileSelectionViewModelfactory(selectedPath);
+                    selectedPath = promptService.ShowFolderBrowserDialogue();
+                    FileSelection = fileSelectionViewModelfactory();
                     if (!string.IsNullOrEmpty(selectedPath))
                     {
+                        FileSelection.LoadFiles(selectedPath);
                         OkCancelPanel = okCancelViewModelfactory();
                     }
                 });
+
+            eventAggregator.Subscribe<CleanUpFilesMessage>(this, message =>
+                                                                 this.FileSelection.CleanUpFiles(selectedPath));
         }
 
         public ICommand SelectFilesCommand { get; private set; }
