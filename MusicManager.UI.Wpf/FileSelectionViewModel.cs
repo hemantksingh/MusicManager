@@ -17,8 +17,10 @@ namespace MusicManager.UI.Wpf
         {
             _directory = directory;
             _fileCleaner = fileCleaner;
+            Files = new List<string>();
 
-            Files = _directory.GetFiles(
+            if(!string.IsNullOrWhiteSpace(selectedPath))
+            Files =_directory.GetFiles(
                         selectedPath, Mp3FileSearchPattern, SearchOption.AllDirectories);
             
             OkCommand = new DelegateCommand<object>(obj =>
@@ -30,7 +32,7 @@ namespace MusicManager.UI.Wpf
                 }, 
                 canClean => !string.IsNullOrWhiteSpace(selectedPath));
             
-            CancelCommand = new DelegateCommand<object>(obj => { });
+            CancelCommand = new DelegateCommand<object>(obj => {});
         }
         
         public ICommand OkCommand { get; private set ; }

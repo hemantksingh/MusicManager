@@ -57,6 +57,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OkCancelPanelViewModel.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="FileSelectionViewModel.cs" />
     <Compile Include="PresentationModule.cs" />

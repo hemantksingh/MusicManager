@@ -11,6 +11,7 @@ namespace MusicManager.UI.Wpf
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<FileSelectionViewModel>();
+            builder.RegisterType<OkCancelPanelViewModel>();
 
             builder.RegisterAssemblyTypes(typeof(PresentationModule).Assembly)
                 .AsImplementedInterfaces()

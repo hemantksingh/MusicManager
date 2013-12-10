@@ -1,4 +1,7 @@
-﻿using AutoMoq;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using AutoMoq;
 using Moq;
 using MusicManager.Infrastructure;
 using MusicManager.Shared;
@@ -10,16 +13,30 @@ namespace MusicManager.Test
     [TestFixture]
     public class MainViewModelTest
     {
+        private AutoMoqer _mocker;
+        private Mock<IPromptService> _mockedPromptService;
+        private Func<MainViewModel> _createMainViewModel;
+        private Mock<IDirectory> _mockedDirectory;
+
         [SetUp]
         public void Initialize()
         {
             _mocker = new AutoMoqer();
+            _mockedPromptService = new Mock<IPromptService>();
+            _mockedDirectory = new Mock<IDirectory>();
+
+            Func<string, FileSelectionViewModel> fileSelectionViewModelfactory =
+                selectedPath => new FileSelectionViewModel(_mockedDirectory.Object,
+                                                           Mock.Of<IFileCleaner>(),
+                                                           selectedPath);
+
+            _createMainViewModel = () => new MainViewModel(_mockedPromptService.Object,
+                                                           fileSelectionViewModelfactory,
+                                                           Mock.Of<OkCancelPanelViewModel>);
         }
 
-        private AutoMoqer _mocker;
-
         [Test]
-        public void OnSelectFilesCommandFolderBroswerDialougeisDisplayed()
+        public void OnSelectFilesCommandFolderBroswerDialougeIsDisplayed()
         {
             var mockedViewModel = _mocker.Resolve<MainViewModel>();
 
@@ -32,34 +49,42 @@ namespace MusicManager.Test
         [Test]
         public void OnSelectFilesCommandIfFolderSelectedFileNamesDisplayed()
         {
-            var mockedPromptService = new Mock<IPromptService>();
-            var mainViewModel = new MainViewModel(mockedPromptService.Object,
-                                                  selectedPath => new FileSelectionViewModel(
-                                                                      Mock.Of<IDirectory>(),
-                                                                      Mock.Of<IFileCleaner>(),
-                                                                      selectedPath));
-            mockedPromptService.Setup(
+            const string path = "C:/";
+            _mockedPromptService.Setup(
+                x => x.ShowFolderBrowserDialogue()).Returns(path);
+            var musicFiles = new List<string> {"AMusicFile.mp3", "BMusicfile.mp3"};
+            _mockedDirectory.Setup(x => x.GetFiles(path, It.IsAny<string>(), SearchOption.AllDirectories))
+                            .Returns(musicFiles);
+
+            MainViewModel mainViewModel = _createMainViewModel();
+            mainViewModel.SelectFilesCommand.Execute(null);
+
+            Assert.IsNotNull(mainViewModel.FileSelection);
+            Assert.AreEqual(musicFiles.Count, mainViewModel.FileSelection.Files.Count);
+        }
+
+        [Test]
+        public void OnSelectFilesCommandIfFolderSelectedOkCancelPanelDisplayed()
+        {
+            _mockedPromptService.Setup(
                 x => x.ShowFolderBrowserDialogue()).Returns("C:/");
 
+            MainViewModel mainViewModel = _createMainViewModel();
             mainViewModel.SelectFilesCommand.Execute(null);
-            
-            Assert.IsNotNull(mainViewModel.FileSelection);
+
+            Assert.IsNotNull(mainViewModel.OkCancelPanel);
         }
 
         [Test]
         public void OnSelectFilesCommandIfNoFolderSelectedNoFileNamesDisplayed()
         {
-            var mockedPromptService = new Mock<IPromptService>();
-            var mainViewModel = new MainViewModel(mockedPromptService.Object,
-                                                  selectedPath => new FileSelectionViewModel(
-                                                                      Mock.Of<IDirectory>(),
-                                                                      Mock.Of<IFileCleaner>(),
-                                                                      selectedPath));
-            mockedPromptService.Setup(
+            _mockedPromptService.Setup(
                 x => x.ShowFolderBrowserDialogue()).Returns(() => null);
+
+            MainViewModel mainViewModel = _createMainViewModel();
             mainViewModel.SelectFilesCommand.Execute(null);
 
-            Assert.IsNull(mainViewModel.FileSelection);
+            Assert.AreEqual(0, mainViewModel.FileSelection.Files.Count);
         }
     }
 }

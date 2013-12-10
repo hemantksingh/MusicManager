@@ -2,34 +2,43 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Music Manager" Height="350" Width="525">
-    <Window.Resources>
-        <ResourceDictionary Source="pack://application:,,,/MusicManager.UI.Wpf;component/ResourceDictionary.xaml"/>
-    </Window.Resources>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+  <Window.Resources>
+    <ResourceDictionary Source="pack://application:,,,/MusicManager.UI.Wpf;component/ResourceDictionary.xaml"/>
+  </Window.Resources>
 
-        <Menu Grid.Row="0" Height="23" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
 
-            <MenuItem Header="_File">
-                <MenuItem Header="Select Files (.mp3)"  Command ="{Binding Path=SelectFilesCommand}"/>
-            </MenuItem>
-            <MenuItem Header="_Edit">
-                <MenuItem Command="ApplicationCommands.Copy"/>
-                <MenuItem Command="ApplicationCommands.Cut"/>
-                <MenuItem Command="ApplicationCommands.Paste"/>
-            </MenuItem>
-        </Menu>
-        <DockPanel LastChildFill="True" Grid.Row="1">
-            <ContentControl 
-              Content="{Binding Path=FileSelection}" 
-              Margin="10" 
-              VerticalAlignment="Stretch" 
-              HorizontalAlignment="Stretch" 
-              Grid.IsSharedSizeScope="True"/>
-        </DockPanel>
-    </Grid>
+    <Menu Grid.Row="0" Height="23" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto">
+
+      <MenuItem Header="_File">
+        <MenuItem Header="Select Files (.mp3)"  Command ="{Binding Path=SelectFilesCommand}"/>
+      </MenuItem>
+      <MenuItem Header="_Edit">
+        <MenuItem Command="ApplicationCommands.Copy"/>
+        <MenuItem Command="ApplicationCommands.Cut"/>
+        <MenuItem Command="ApplicationCommands.Paste"/>
+      </MenuItem>
+    </Menu>
+    <DockPanel LastChildFill="True" Grid.Row="1">
+      <ContentControl
+        Content="{Binding Path=FileSelection}"
+        Margin="10"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        Grid.IsSharedSizeScope="True"/>
+    </DockPanel>
+    <DockPanel LastChildFill="True" Grid.Row="2">
+      <ContentControl
+        Content="{Binding Path=OkCancelPanel}"
+        Margin="10"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        Grid.IsSharedSizeScope="True"/>
+    </DockPanel>
+  </Grid>
 </Window>

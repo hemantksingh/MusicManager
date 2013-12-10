@@ -9,27 +9,35 @@ namespace MusicManager
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private readonly Func<string, FileSelectionViewModel> _fileSelectionViewModelfactory;
-        private readonly IPromptService _promptService;
         private FileSelectionViewModel _fileSelection;
+        private OkCancelPanelViewModel _okCancelPanel;
 
         public MainViewModel(IPromptService promptService,
-                             Func<string, FileSelectionViewModel> fileSelectionViewModelfactory)
+                             Func<string, FileSelectionViewModel> fileSelectionViewModelfactory,
+                             Func<OkCancelPanelViewModel> okCancelViewModelfactory)
         {
-            _promptService = promptService;
-            _fileSelectionViewModelfactory = fileSelectionViewModelfactory;
-
             SelectFilesCommand = new DelegateCommand<object>(o =>
                 {
-                    string selectedPath = _promptService.ShowFolderBrowserDialogue();
+                    string selectedPath = promptService.ShowFolderBrowserDialogue();
+                    FileSelection = fileSelectionViewModelfactory(selectedPath);
                     if (!string.IsNullOrEmpty(selectedPath))
                     {
-                        FileSelection = _fileSelectionViewModelfactory(selectedPath);
+                        OkCancelPanel = okCancelViewModelfactory();
                     }
                 });
         }
 
         public ICommand SelectFilesCommand { get; private set; }
+
+        public OkCancelPanelViewModel OkCancelPanel
+        {
+            get { return _okCancelPanel; }
+            set
+            {
+                _okCancelPanel = value;
+                OnPropertyChanged();
+            }
+        }
 
         public FileSelectionViewModel FileSelection
         {
