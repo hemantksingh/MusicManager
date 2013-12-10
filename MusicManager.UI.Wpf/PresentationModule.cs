@@ -13,7 +13,7 @@ namespace MusicManager.UI.Wpf
             builder.RegisterType<FileSelectionViewModel>();
             builder.RegisterType<OkCancelPanelViewModel>();
 
-            builder.RegisterAssemblyTypes(typeof(PresentationModule).Assembly)
+            builder.RegisterAssemblyTypes(this.GetType().Assembly)
                 .AsImplementedInterfaces()
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(InfoLoggerAspect));

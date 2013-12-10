@@ -10,7 +10,7 @@ namespace MusicManager.Infrastructure
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(typeof (InfrastructureModule).Assembly)
+            builder.RegisterAssemblyTypes(this.GetType().Assembly)
                    .AsImplementedInterfaces()
                    .EnableInterfaceInterceptors()
                    .InterceptedBy(typeof (InfoLoggerAspect));

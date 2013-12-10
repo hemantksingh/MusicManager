@@ -14,7 +14,7 @@ namespace MusicManager
             builder.RegisterType<MainViewModel>();
             builder.Register(context => Thread.CurrentPrincipal).As<IPrincipal>();
 
-            builder.RegisterAssemblyTypes(typeof(MusicManagerModule).Assembly)
+            builder.RegisterAssemblyTypes(this.GetType().Assembly)
                 .AsImplementedInterfaces()
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(InfoLoggerAspect))
