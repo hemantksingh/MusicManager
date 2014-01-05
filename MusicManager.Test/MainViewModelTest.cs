@@ -141,5 +141,63 @@ namespace MusicManager.Test
 
             _mockedFileCleaner.Verify(x => x.CleanFileNames(files));
         }
+
+        [Test]
+        public void FileSelectionIsCleared()
+        {
+            MainViewModel mainViewModel = _createMainViewModel();
+            
+            mainViewModel.SelectFilesCommand.Execute(null);
+            mainViewModel.OkCancelPanel.OkCommand.Execute(null);
+
+            Assert.IsNull(mainViewModel.FileSelection);
+            Assert.IsNull(mainViewModel.OkCancelPanel);
+        }
+    }
+
+    public class WhenCancelCommandIsIssuedAfterFileSelection
+    {
+        private const string DefaultPath = "C:/";
+        private const string SearchPattern = "*.mp3";
+        private Func<MainViewModel> _createMainViewModel;
+        private Mock<IDirectory> _mockedDirectory;
+        private Mock<IFileCleaner> _mockedFileCleaner;
+        private Mock<IPromptService> _mockedPromptService;
+
+        [SetUp]
+        public void Initialize()
+        {
+            _mockedPromptService = new Mock<IPromptService>();
+            _mockedDirectory = new Mock<IDirectory>();
+            _mockedFileCleaner = new Mock<IFileCleaner>();
+
+            _mockedPromptService.Setup(
+                x => x.ShowFolderBrowserDialogue()).Returns(DefaultPath);
+            
+            Func<FileSelectionViewModel> fileSelectionViewModelfactory =
+                () => new FileSelectionViewModel(_mockedDirectory.Object,
+                                                 _mockedFileCleaner.Object);
+
+            var eventAggregator = new EventAggregator();
+            _createMainViewModel = () => new MainViewModel(_mockedPromptService.Object, eventAggregator,
+                                                           fileSelectionViewModelfactory,
+                                                           () => new OkCancelPanelViewModel(
+                                                                     eventAggregator));
+        }
+
+        [Test]
+        public void FileSelectionIsCleared()
+        {
+            var musicFiles = new List<string> { "AMusicFile.mp3", "BMusicfile.mp3" };
+            _mockedDirectory.Setup(x => x.GetFiles(DefaultPath, SearchPattern, SearchOption.AllDirectories))
+                            .Returns(musicFiles);
+
+            MainViewModel mainViewModel = _createMainViewModel();
+            mainViewModel.SelectFilesCommand.Execute(null);
+            mainViewModel.OkCancelPanel.CancelCommand.Execute(null);
+
+            Assert.IsNull(mainViewModel.FileSelection);
+            Assert.IsNull(mainViewModel.OkCancelPanel);
+        }
     }
 }

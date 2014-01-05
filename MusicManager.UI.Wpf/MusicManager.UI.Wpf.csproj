@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CleanUpFilesMessage.cs" />
+    <Compile Include="ClearFileSelectionMessage.cs" />
     <Compile Include="EventAggregator.cs" />
     <Compile Include="IEventAggregator.cs" />
     <Compile Include="NotifyPropertyChangedViewModel.cs" />

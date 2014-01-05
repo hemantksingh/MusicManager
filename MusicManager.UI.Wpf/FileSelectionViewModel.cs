@@ -23,7 +23,7 @@ namespace MusicManager.UI.Wpf
         public List<string> Files
         {
             get { return _files; }
-            set
+            private set
             {
                 _files = value;
                 OnPropertyChanged();
@@ -46,6 +46,11 @@ namespace MusicManager.UI.Wpf
 
             Files = _directory.GetFiles(
                 selectedPath, Mp3FileSearchPattern, SearchOption.AllDirectories);
+        }
+
+        public void ClearFiles()
+        {
+            Files = new List<string>();
         }
     }
 }

@@ -9,7 +9,8 @@ namespace MusicManager.UI.Wpf
             this.OkCommand = new DelegateCommand<object>(
                 o => eventAggregator.Publish(new CleanUpFilesMessage()));
             
-            this.CancelCommand = new DelegateCommand<object>(o => { });
+            this.CancelCommand = new DelegateCommand<object>(o => 
+                eventAggregator.Publish(new ClearFileSelectionMessage()));
         }
         public ICommand OkCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }

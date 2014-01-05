@@ -27,7 +27,19 @@ namespace MusicManager
                 });
 
             eventAggregator.Subscribe<CleanUpFilesMessage>(this, message =>
-                                                                 this.FileSelection.CleanUpFiles(selectedPath));
+                {
+                    FileSelection.CleanUpFiles(selectedPath);
+                    ClearFileSelection();
+                });
+
+            eventAggregator.Subscribe<ClearFileSelectionMessage>(this, message => 
+                ClearFileSelection());
+        }
+
+        private void ClearFileSelection()
+        {
+            FileSelection = null;
+            OkCancelPanel = null;
         }
 
         public ICommand SelectFilesCommand { get; private set; }
@@ -45,7 +57,7 @@ namespace MusicManager
         public FileSelectionViewModel FileSelection
         {
             get { return _fileSelection; }
-            set
+            private set
             {
                 _fileSelection = value;
                 OnPropertyChanged();
