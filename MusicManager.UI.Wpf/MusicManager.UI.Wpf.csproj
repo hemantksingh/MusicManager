@@ -60,11 +60,13 @@
     <Compile Include="CleanUpFilesMessage.cs" />
     <Compile Include="EventAggregator.cs" />
     <Compile Include="IEventAggregator.cs" />
+    <Compile Include="NotifyPropertyChangedViewModel.cs" />
     <Compile Include="OkCancelPanelViewModel.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="FileSelectionViewModel.cs" />
     <Compile Include="PresentationModule.cs" />
     <Compile Include="PromptService.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

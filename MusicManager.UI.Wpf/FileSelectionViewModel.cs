@@ -5,21 +5,30 @@ using MusicManager.Shared;
 
 namespace MusicManager.UI.Wpf
 {
-    public class FileSelectionViewModel
+    public class FileSelectionViewModel : NotifyPropertyChangedViewModel
     {
         private const string Mp3FileSearchPattern = "*.mp3";
 
         private readonly IDirectory _directory;
         private readonly IFileCleaner _fileCleaner;
+        private List<string> _files;
 
         public FileSelectionViewModel(IDirectory directory, IFileCleaner fileCleaner)
         {
             _directory = directory;
             _fileCleaner = fileCleaner;
-            Files = new List<string>();
+            _files = new List<string>();
         }
 
-        public List<string> Files { get; private set; }
+        public List<string> Files
+        {
+            get { return _files; }
+            set
+            {
+                _files = value;
+                OnPropertyChanged();
+            }
+        }
 
         public void CleanUpFiles(string selectedPath)
         {
@@ -34,7 +43,7 @@ namespace MusicManager.UI.Wpf
         public void LoadFiles(string selectedPath)
         {
             if (string.IsNullOrWhiteSpace(selectedPath)) return;
-            
+
             Files = _directory.GetFiles(
                 selectedPath, Mp3FileSearchPattern, SearchOption.AllDirectories);
         }
