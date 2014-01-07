@@ -23,12 +23,10 @@ namespace MusicManager.UI.Wpf
         public List<string> Files
         {
             get { return _files; }
-            private set
-            {
-                _files = value;
-                OnPropertyChanged();
-            }
+            private set { _files = value; OnPropertyChanged(); }
         }
+
+        public int NoOfFiles { get { return Files.Count; } }
 
         public void CleanUpFiles(string selectedPath)
         {
@@ -46,11 +44,8 @@ namespace MusicManager.UI.Wpf
 
             Files = _directory.GetFiles(
                 selectedPath, Mp3FileSearchPattern, SearchOption.AllDirectories);
-        }
 
-        public void ClearFiles()
-        {
-            Files = new List<string>();
+            OnPropertyChanged("NoOfFiles");
         }
     }
 }

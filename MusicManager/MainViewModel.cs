@@ -32,7 +32,7 @@ namespace MusicManager
                     ClearFileSelection();
                 });
 
-            eventAggregator.Subscribe<ClearFileSelectionMessage>(this, message => 
+            eventAggregator.Subscribe<ClearFileSelectionMessage>(this, message =>
                 ClearFileSelection());
         }
 
@@ -47,21 +47,13 @@ namespace MusicManager
         public OkCancelPanelViewModel OkCancelPanel
         {
             get { return _okCancelPanel; }
-            set
-            {
-                _okCancelPanel = value;
-                OnPropertyChanged();
-            }
+            private set { _okCancelPanel = value; OnPropertyChanged(); }
         }
 
         public FileSelectionViewModel FileSelection
         {
             get { return _fileSelection; }
-            private set
-            {
-                _fileSelection = value;
-                OnPropertyChanged();
-            }
+            private set { _fileSelection = value; OnPropertyChanged(); }
         }
     }
 }

@@ -25,6 +25,8 @@ namespace MusicManager.Test
 
             _mockedPromptService.Setup(
                 x => x.ShowFolderBrowserDialogue()).Returns(DefaultPath);
+            _mockedDirectory.Setup(x => x.GetFiles(DefaultPath, "*.mp3", SearchOption.AllDirectories))
+                            .Returns(new List<string>());
 
             Func<FileSelectionViewModel> fileSelectionViewModelfactory =
                 () => new FileSelectionViewModel(_mockedDirectory.Object, Mock.Of<IFileCleaner>());
@@ -35,7 +37,6 @@ namespace MusicManager.Test
                                                                      Mock.Of<IEventAggregator>()));
         }
 
-        
         [Test]
         public void FolderBroswerDialougeIsDisplayed()
         {
@@ -59,7 +60,56 @@ namespace MusicManager.Test
             mainViewModel.SelectFilesCommand.Execute(null);
 
             Assert.IsNotNull(mainViewModel.FileSelection);
-            Assert.AreEqual(musicFiles.Count, mainViewModel.FileSelection.Files.Count);
+        }
+
+        [Test]
+        public void IfFolderSelectedFileCountUpdated()
+        {
+            var musicFiles = new List<string> { "AMusicFile.mp3", "BMusicfile.mp3" };
+            _mockedDirectory.Setup(x => x.GetFiles(DefaultPath,
+                                                   It.IsAny<string>(),
+                                                   SearchOption.AllDirectories))
+                            .Returns(musicFiles);
+
+            MainViewModel mainViewModel = _createMainViewModel();
+            
+            mainViewModel.SelectFilesCommand.Execute(null);
+
+            Assert.AreEqual(musicFiles.Count, mainViewModel.FileSelection.NoOfFiles);
+        }
+
+        [Test]
+        public void IfFolderSelectedFileCountChangeNotified()
+        {
+            MainViewModel mainViewModel = _createMainViewModel();
+            
+            mainViewModel.SelectFilesCommand.Execute(null);
+
+            mainViewModel.FileSelection.ShouldNotifyOn(model => model.NoOfFiles)
+                .When(model => model.LoadFiles(DefaultPath));
+        }
+
+        [Test]
+        public void IfFolderSelectedAgainFileCountUpdated()
+        {
+            var originallySelectedMusicFiles = new List<string> { "AMusic.mp3", "BMusic.mp3" };
+            var newlySelectedMusicFiles = new List<string> { "AMusic.mp3", "BMusic.mp3", "CMusic.mp3" };
+            _mockedDirectory.Setup(x => x.GetFiles(DefaultPath,
+                                                   It.IsAny<string>(),
+                                                   SearchOption.AllDirectories))
+                            .Returns(originallySelectedMusicFiles);
+
+            MainViewModel mainViewModel = _createMainViewModel();
+            mainViewModel.SelectFilesCommand.Execute(null);
+            
+            _mockedDirectory.Setup(x => x.GetFiles(DefaultPath,
+                                                   It.IsAny<string>(),
+                                                   SearchOption.AllDirectories))
+                            .Returns(newlySelectedMusicFiles);
+            mainViewModel.SelectFilesCommand.Execute(null);
+            
+            Assert.AreNotEqual(originallySelectedMusicFiles.Count, mainViewModel.FileSelection.NoOfFiles);
+            Assert.AreEqual(newlySelectedMusicFiles.Count, mainViewModel.FileSelection.NoOfFiles);
         }
 
         [Test]
@@ -102,6 +152,8 @@ namespace MusicManager.Test
 
             _mockedPromptService.Setup(
                 x => x.ShowFolderBrowserDialogue()).Returns(DefaultPath);
+            _mockedDirectory.Setup(x => x.GetFiles(DefaultPath, SearchPattern, SearchOption.AllDirectories))
+                            .Returns(new List<string>());
 
             Func<FileSelectionViewModel> fileSelectionViewModelfactory =
                 () => new FileSelectionViewModel(_mockedDirectory.Object,
