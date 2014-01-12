@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{381A2B60-AA45-4C97-96C4-595EBD7BAB2B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test.MusicManager</RootNamespace>
+    <AssemblyName>Test.MusicManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\MusicManager.Test\bin\Debug\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\MusicManager.Test\bin\Debug\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseTestFixture.cs" />
+    <Compile Include="NotifyExpectation.cs" />
+    <Compile Include="NotifyPropertyChanged.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenarios\CleaningUpFiles\When_Cancel_clicked_after_selecting_files.cs" />
+    <Compile Include="Scenarios\CleaningUpFiles\When_Ok_clicked_after_selecting_files.cs" />
+    <Compile Include="Scenarios\SelectingFiles\When_a_folder_with_music_files_selected.cs" />
+    <Compile Include="Scenarios\SelectingFiles\When_a_folder_with_music_files_selected_again.cs" />
+    <Compile Include="Scenarios\SelectingFiles\When_a_folder_with_no_music_files_selected.cs" />
+    <Compile Include="Scenarios\SelectingFiles\When_selecting_files.cs" />
+    <Compile Include="Scenarios\SelectingFiles\When_selecting_files_cancelled.cs" />
+    <Compile Include="StringExtensionTest.cs" />
+    <Compile Include="ThereWasNoExceptionButOneWasExpectedException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MusicManager.Infrastructure\MusicManager.Infrastructure.csproj">
+      <Project>{D9B78ACD-1C52-4A0B-ABAA-B9B9B0B6D11E}</Project>
+      <Name>MusicManager.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MusicManager.Shared\MusicManager.Shared.csproj">
+      <Project>{123707FA-18C4-4089-8235-7F79111C81E5}</Project>
+      <Name>MusicManager.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MusicManager.UI.Wpf\MusicManager.UI.Wpf.csproj">
+      <Project>{6A182AA0-49F4-48B0-A890-56902B559724}</Project>
+      <Name>MusicManager.UI.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MusicManager\MusicManager.csproj">
+      <Project>{E143B8FB-9AB0-4939-B2EE-0493D01E24DC}</Project>
+      <Name>MusicManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

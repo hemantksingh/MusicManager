@@ -130,7 +130,7 @@ namespace MusicManager.Test
             MainViewModel mainViewModel = _createMainViewModel();
             mainViewModel.SelectFilesCommand.Execute(null);
 
-            Assert.AreEqual(0, mainViewModel.FileSelection.Files.Count);
+            Assert.IsNull(mainViewModel.FileSelection);
         }
     }
 

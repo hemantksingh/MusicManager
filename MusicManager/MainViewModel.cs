@@ -18,9 +18,9 @@ namespace MusicManager
             SelectFilesCommand = new DelegateCommand<object>(o =>
                 {
                     selectedPath = promptService.ShowFolderBrowserDialogue();
-                    FileSelection = fileSelectionViewModelfactory();
                     if (!string.IsNullOrEmpty(selectedPath))
                     {
+                        FileSelection = fileSelectionViewModelfactory();
                         FileSelection.LoadFiles(selectedPath);
                         OkCancelPanel = okCancelViewModelfactory();
                     }

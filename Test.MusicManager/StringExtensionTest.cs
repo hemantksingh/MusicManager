@@ -1,7 +1,7 @@
-﻿using MusicManager.Shared;
+using MusicManager.Shared;
 using NUnit.Framework;
 
-namespace MusicManager.Test
+namespace Test.MusicManager
 {
     [TestFixture]
     class StringExtensionTest
