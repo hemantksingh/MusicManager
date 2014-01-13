@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationBootStrapper.cs" />
     <Compile Include="ErrorHandler.cs" />
     <Compile Include="MusicManagerModule.cs" />
     <Compile Include="MainViewModel.cs" />

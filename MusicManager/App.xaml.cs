@@ -53,32 +53,8 @@ namespace MusicManager
 
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            try
-            {
-                var rolesUserBelongsTo = new[] {"Admin", "Generic"};
-                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity("HK"), rolesUserBelongsTo);
-                _container = BuildAutofacContainer();
-                CompositionRoot = _container.Resolve<MainViewModel>();
-            }
-            catch (Exception exception)
-            {
-                throw new Exception("An error ocurred while bootstrapping the applciation.", exception);
-            }
-        }
-
-        /// <summary>
-        /// Loads the dependant modules first before loading the main application module
-        /// to enable overriding the default dependency registrations.
-        /// </summary>
-        /// <returns></returns>
-        private IContainer BuildAutofacContainer()
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterModule<PresentationModule>();
-            builder.RegisterModule<InfrastructureModule>();
-            builder.RegisterModule<MusicManagerModule>();
-
-            return builder.Build();
+            _container = ApplicationBootStrapper.BootUpTheApp();
+            CompositionRoot = _container.Resolve<MainViewModel>();
         }
     }
 }
