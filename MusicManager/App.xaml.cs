@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Security.Principal;
-using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using Autofac;
@@ -11,16 +9,10 @@ using MusicManager.UI.Wpf;
 namespace MusicManager
 {
     /// <summary>
-    ///     Interaction logic for App.xaml
+    ///  Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
-        /// <summary>
-        ///  The single place where the composition of the object graphs for the entire application
-        ///  takes place. The container resolves this on application start up.
-        /// </summary>
-        public static object CompositionRoot;
-
         private IContainer _container;
 
         private void App_OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -54,7 +46,8 @@ namespace MusicManager
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
             _container = ApplicationBootStrapper.BootUpTheApp();
-            CompositionRoot = _container.Resolve<MainViewModel>();
+            var mainView = _container.Resolve<IMainView>();
+            mainView.Show();
         }
     }
 }
