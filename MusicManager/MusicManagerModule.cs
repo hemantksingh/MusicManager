@@ -15,8 +15,7 @@ namespace MusicManager
             builder.RegisterAssemblyTypes(this.GetType().Assembly)
                 .AsImplementedInterfaces()
                 .EnableInterfaceInterceptors()
-                .InterceptedBy(typeof(InfoLoggerAspect))
-                .InterceptedBy(typeof(AdminRoleAspect));
+                .InterceptedBy(typeof(InfoLoggerAspect));
             
             builder.RegisterAssemblyTypes(this.GetType().Assembly)
                 .Where(q => q.IsPublic)
@@ -25,7 +24,8 @@ namespace MusicManager
                 .InterceptedBy(typeof(InfoLoggerAspect));
             
             builder.RegisterType<MainViewModel>();
-            builder.Register(context => Thread.CurrentPrincipal).As<IPrincipal>();
+            builder.Register(context => Thread.CurrentPrincipal).As<IPrincipal>()
+                .SingleInstance();
             builder.RegisterType<EventAggregator>().As<IEventAggregator>()
                 .SingleInstance()
                 .EnableInterfaceInterceptors()

@@ -53,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenarios\CleaningUpFiles\When_Cancel_clicked_after_selecting_files.cs" />
     <Compile Include="Scenarios\CleaningUpFiles\When_Ok_clicked_after_selecting_files.cs" />
+    <Compile Include="Scenarios\CleaningUpFiles\When_Ok_clicked_after_selecting_readonly_files.cs" />
     <Compile Include="Scenarios\SelectingFiles\When_a_folder_with_music_files_selected.cs" />
     <Compile Include="Scenarios\SelectingFiles\When_a_folder_with_music_files_selected_again.cs" />
     <Compile Include="Scenarios\SelectingFiles\When_a_folder_with_no_music_files_selected.cs" />

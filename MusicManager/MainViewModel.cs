@@ -10,7 +10,8 @@ namespace MusicManager
         private FileSelectionViewModel _fileSelection;
         private OkCancelPanelViewModel _okCancelPanel;
 
-        public MainViewModel(IPromptService promptService, IEventAggregator eventAggregator,
+        public MainViewModel(IPromptService promptService, 
+                             IEventAggregator eventAggregator,
                              Func<FileSelectionViewModel> fileSelectionViewModelfactory,
                              Func<OkCancelPanelViewModel> okCancelViewModelfactory)
         {
@@ -18,17 +19,26 @@ namespace MusicManager
             SelectFilesCommand = new DelegateCommand<object>(o =>
                 {
                     selectedPath = promptService.ShowFolderBrowserDialogue();
-                    if (!string.IsNullOrEmpty(selectedPath))
-                    {
-                        FileSelection = fileSelectionViewModelfactory();
-                        FileSelection.LoadFiles(selectedPath);
-                        OkCancelPanel = okCancelViewModelfactory();
-                    }
+                    if (string.IsNullOrEmpty(selectedPath)) return;
+                    FileSelection = fileSelectionViewModelfactory();
+                    FileSelection.LoadFiles(selectedPath);
+                    OkCancelPanel = okCancelViewModelfactory();
                 });
 
             eventAggregator.Subscribe<CleanUpFilesMessage>(this, message =>
                 {
-                    FileSelection.CleanUpFiles(selectedPath);
+                    try
+                    {
+                        if(FileSelection == null) return;
+                        FileSelection.CleanUpFiles(selectedPath);
+                    }
+                    catch (UnauthorizedAccessException exception)
+                    {
+                        var errorMessage = string.Format("Failed to clean up files. {0} " +
+                                                         "This may be due to the file being marked as 'Read Only'",
+                                                          exception.Message);
+                        promptService.ShowError(errorMessage);
+                    }
                     ClearFileSelection();
                 });
 

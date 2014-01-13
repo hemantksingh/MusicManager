@@ -25,7 +25,6 @@ namespace Test.MusicManager.Scenarios.CleaningUpFiles
                 x => x.ShowFolderBrowserDialogue()).Returns(DefaultPath);
             
             var eventAggregator = new EventAggregator();
-            _mockedFileCleaner = new Mock<IFileCleaner>();
             Func<FileSelectionViewModel> fileSelectionViewModelFactory = () =>
                 new FileSelectionViewModel(_mockedDirectory.Object, _mockedFileCleaner.Object);
             Func<OkCancelPanelViewModel> okCancelViewModelFactory =
@@ -38,6 +37,7 @@ namespace Test.MusicManager.Scenarios.CleaningUpFiles
 
         protected override void Given()
         {
+            _mockedFileCleaner = new Mock<IFileCleaner>();            
             _mockedDirectory = new Mock<IDirectory>();            
             _musicFiles = new List<string> { "AMusicFile.mp3", "BMusicfile.mp3" };
             _mockedDirectory.Setup(x => x.GetFiles(DefaultPath,
