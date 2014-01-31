@@ -26,8 +26,10 @@ namespace MusicManager
             builder.RegisterModule<PresentationModule>();
             builder.RegisterModule<InfrastructureModule>();
             builder.RegisterModule<MusicManagerModule>();
-
-            return builder.Build();
+            IContainer container = builder.Build();
+            
+            RegisterCommandHandlersInMessageRouter.BootStrap(container);
+            return container;
         }
     }
 }

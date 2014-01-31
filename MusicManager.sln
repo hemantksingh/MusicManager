@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicManager.UI.Wpf", "Musi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.MusicManager", "Test.MusicManager\Test.MusicManager.csproj", "{381A2B60-AA45-4C97-96C4-595EBD7BAB2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicManager.CommandHandlers", "MusicManager.CommandHandlers\MusicManager.CommandHandlers.csproj", "{FDE59CA3-D0B4-4A50-B582-03C9B7C93A19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicManager.Commands", "MusicManager.Commands\MusicManager.Commands.csproj", "{AE432E80-9950-4EB6-BDD1-1095B17FB63B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,26 @@ Global
 		{381A2B60-AA45-4C97-96C4-595EBD7BAB2B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{381A2B60-AA45-4C97-96C4-595EBD7BAB2B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{381A2B60-AA45-4C97-96C4-595EBD7BAB2B}.Release|x86.ActiveCfg = Release|Any CPU
+		{FDE59CA3-D0B4-4A50-B582-03C9B7C93A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE59CA3-D0B4-4A50-B582-03C9B7C93A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE59CA3-D0B4-4A50-B582-03C9B7C93A19}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FDE59CA3-D0B4-4A50-B582-03C9B7C93A19}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FDE59CA3-D0B4-4A50-B582-03C9B7C93A19}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FDE59CA3-D0B4-4A50-B582-03C9B7C93A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE59CA3-D0B4-4A50-B582-03C9B7C93A19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDE59CA3-D0B4-4A50-B582-03C9B7C93A19}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FDE59CA3-D0B4-4A50-B582-03C9B7C93A19}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FDE59CA3-D0B4-4A50-B582-03C9B7C93A19}.Release|x86.ActiveCfg = Release|Any CPU
+		{AE432E80-9950-4EB6-BDD1-1095B17FB63B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE432E80-9950-4EB6-BDD1-1095B17FB63B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE432E80-9950-4EB6-BDD1-1095B17FB63B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AE432E80-9950-4EB6-BDD1-1095B17FB63B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AE432E80-9950-4EB6-BDD1-1095B17FB63B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AE432E80-9950-4EB6-BDD1-1095B17FB63B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE432E80-9950-4EB6-BDD1-1095B17FB63B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE432E80-9950-4EB6-BDD1-1095B17FB63B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AE432E80-9950-4EB6-BDD1-1095B17FB63B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AE432E80-9950-4EB6-BDD1-1095B17FB63B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
