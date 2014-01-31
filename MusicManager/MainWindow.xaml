@@ -27,7 +27,7 @@
     <DockPanel LastChildFill="True" Grid.Row="1">
       <ContentControl
         Content="{Binding Path=FileSelection}"
-        Margin="10"
+        Margin="10,10,10,0"
         VerticalAlignment="Stretch"
         HorizontalAlignment="Stretch"
         Grid.IsSharedSizeScope="True"/>
