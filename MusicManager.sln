@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicManager.UI.Wpf", "Musi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.MusicManager", "Test.MusicManager\Test.MusicManager.csproj", "{381A2B60-AA45-4C97-96C4-595EBD7BAB2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.UI.MusicManager", "Test.UI.MusicManager\Test.UI.MusicManager.csproj", "{D1A03860-A329-4ADA-BF45-7C32161BF117}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,16 @@ Global
 		{381A2B60-AA45-4C97-96C4-595EBD7BAB2B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{381A2B60-AA45-4C97-96C4-595EBD7BAB2B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{381A2B60-AA45-4C97-96C4-595EBD7BAB2B}.Release|x86.ActiveCfg = Release|Any CPU
+		{D1A03860-A329-4ADA-BF45-7C32161BF117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1A03860-A329-4ADA-BF45-7C32161BF117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1A03860-A329-4ADA-BF45-7C32161BF117}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D1A03860-A329-4ADA-BF45-7C32161BF117}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D1A03860-A329-4ADA-BF45-7C32161BF117}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D1A03860-A329-4ADA-BF45-7C32161BF117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1A03860-A329-4ADA-BF45-7C32161BF117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1A03860-A329-4ADA-BF45-7C32161BF117}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D1A03860-A329-4ADA-BF45-7C32161BF117}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D1A03860-A329-4ADA-BF45-7C32161BF117}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

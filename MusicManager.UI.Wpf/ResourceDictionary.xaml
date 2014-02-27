@@ -15,7 +15,7 @@
       </Grid.RowDefinitions>
       <StackPanel Grid.Row="0" Orientation="Horizontal">
         <TextBlock Text="Selected files: "/>
-        <TextBlock Text="{Binding NoOfFiles}"/>
+        <TextBlock Name="NoOfFiles"  Text="{Binding NoOfFiles}"/>
       </StackPanel>
       
       <ListBox  Grid.Row="1" ItemsSource="{Binding Files}">
