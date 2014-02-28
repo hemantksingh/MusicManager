@@ -9,13 +9,7 @@ using TestStack.White.UIItems.WindowItems;
 
 namespace Test.UI.MusicManager.SelectingFiles
 {
-    /// <summary>
-    /// Given Select mp3 files option selected
-    /// When a folder is selected with no music files
-    /// Then there are no music files displayed on the main view
-    /// And Ok Cancel panel is displayed to get back to the main view
-    /// And The selected files count is displayed as 0.
-    /// </summary>
+    [Scenario("Selecting mp3 files from the menu")]
     public class Given_menu_option_select_mp3_files_is_selected
     {
         private const string AppFileName = "C:/Code/MusicManager/MusicManager/bin/Debug/MusicManager.exe";
