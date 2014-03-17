@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace MusicManager.Infrastructure.Bus
 {
-    class DirectBus : IBus
+    public class DirectBus : IBus
     {
         private readonly IMessageRouter _messageRouter;
         private readonly object _lockObject = new object();

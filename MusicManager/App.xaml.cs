@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
 using Autofac;
@@ -45,7 +46,8 @@ namespace MusicManager
 
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            _container = ApplicationBootStrapper.BootUpTheApp();
+            var containerFactory = new ContainerFactory(new Dictionary<Type, object>());
+            _container = ApplicationBootStrapper.BootUpTheApp(containerFactory);
             var mainView = _container.Resolve<IMainView>();
             mainView.Show();
         }

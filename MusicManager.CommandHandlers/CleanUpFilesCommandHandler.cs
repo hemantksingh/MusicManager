@@ -5,7 +5,7 @@ using MusicManager.Shared;
 
 namespace MusicManager.CommandHandlers
 {
-    class CleanUpFilesCommandHandler : ICommandHandler<CleanUpFilesCommand>
+    public class CleanUpFilesCommandHandler : ICommandHandler<CleanUpFilesCommand>
     {
         private readonly IDirectory _directory;
         private readonly IFileCleaner _fileCleaner;

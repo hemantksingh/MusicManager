@@ -77,7 +77,9 @@
     </ApplicationDefinition>
     <Compile Include="ApplicationBootStrapper.cs" />
     <Compile Include="CommandReader.cs" />
+    <Compile Include="ContainerFactory.cs" />
     <Compile Include="ErrorHandler.cs" />
+    <Compile Include="IContainerFactory.cs" />
     <Compile Include="MusicManagerModule.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="RegisterCommandHandlersInMessageRouter.cs" />
